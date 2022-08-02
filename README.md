@@ -18,4 +18,5 @@ pip install -r requirements.txt
 CLIENT_ID="Your client ID"
 CLIENT_SECRET="Your client secret"
 REDIRECT_URI="Your redirect URI"
+```
 Note: The redirect URI in this file must be the same as the redirect URI that you put in the dashboard when registering the program
