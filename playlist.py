@@ -58,7 +58,17 @@ class Playlist:
         # Add track(s) to specified playlist
         sp.playlist_add_items(playlist_id, track_uris, 0)
 
+    def set_name(self, sp: spotipy.Spotify, id, name, desc):
 
+        # Change the name of created playlist. This will be used so that the authentication can be done first
+        sp.playlist_change_details(id, name=name, description=desc)
+
+    def delete_playlist(self, sp: spotipy.Spotify, id):
+
+        # Delete created playlist in instance recommendations were failed
+        sp.current_user_unfollow_playlist(id)
+
+    
 def main():
     playlist = Playlist()
 

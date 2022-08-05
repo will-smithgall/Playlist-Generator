@@ -53,6 +53,7 @@ class Recommendations:
 
         return self.valid_genres
 
+    #Returns 1 if it successfully gets recommendations, returns -1 if an error is encountered.
     def recommendations(self, token, amount):
         rec_url = "https://api.spotify.com/v1/recommendations"
 
@@ -75,8 +76,14 @@ class Recommendations:
         response = r.json()
 
         # Get URI for each track in response
-        for element in response["tracks"]:
-            self.recommended_uris.append(element["uri"])
+        try:
+            for element in response["tracks"]:
+                self.recommended_uris.append(element["uri"])
+
+            return 1
+        except KeyError as e:
+            print("\nThere was an error getting the recommendations.\nThis is usually due to an invalid URL being passed.\nPlease check your artist and track URLs and try again!")
+            return -1
 
     def get_recommendations(self):
         return self.recommended_uris
