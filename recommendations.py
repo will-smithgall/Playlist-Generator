@@ -53,7 +53,7 @@ class Recommendations:
 
         return self.valid_genres
 
-    #Returns 1 if it successfully gets recommendations, returns -1 if an error is encountered.
+    # Returns 1 if it successfully gets recommendations, returns -1 if an error is encountered.
     def recommendations(self, token, amount):
         rec_url = "https://api.spotify.com/v1/recommendations"
 
@@ -82,7 +82,9 @@ class Recommendations:
 
             return 1
         except KeyError as e:
-            print("\nThere was an error getting the recommendations.\nThis is usually due to an invalid URL being passed.\nPlease check your artist and track URLs and try again!")
+            print(
+                "\nThere was an error getting the recommendations.\nThis is usually due to an invalid URL being passed.\nPlease check your artist and track URLs and try again!"
+            )
             return -1
 
     def get_recommendations(self):
@@ -91,13 +93,23 @@ class Recommendations:
     def set_seeds(self, artists, genres, tracks):
         # Get artist id from URL
         for artist in artists:
-            link = artist.split("/")
-            self.artists.append(link[-1])
+            link = artist.split("/")[-1]
+
+            if "?" in link:
+                link = link.split("?")
+                self.artists.append(link[0])
+            else:
+                self.artists.append(link)
 
         # Get track id from URL
         for track in tracks:
-            link = track.split("/")[-1].split("?")
-            self.tracks.append(link[0])
+            link = track.split("/")[-1]
+
+            if "?" in link:
+                link = link.split("?")
+                self.tracks.append(link[0])
+            else:
+                self.tracks.append(link)
 
         # Add genres
         self.genres = genres
@@ -110,19 +122,20 @@ def main():
 
     # These will be passed in by the user, temp for now
     artists = [
-        "https://open.spotify.com/artist/7ENzCHnmJUr20nUjoZ0zZ1",
-        "https://open.spotify.com/artist/4UpA1KitN1RgIZVyWDbZ0U",
+        "https://open.spotify.com/artist/7nCgNmfYJcsVy3vOOzExYS?si=X-C3ldlTRtiRyZtSKqfcGg",
+        "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02",
     ]
     genres = "jazz,funk"
     tracks = [
-        "https://open.spotify.com/track/2NZUXUA8gGmXXw5MayF63k?si=496b37bbfdd14fa8",
-        "https://open.spotify.com/track/1HJXdfuWc6IlKBMLtITaHD?si=ebdb690f2db9490c",
+        "https://open.spotify.com/track/1UvaZaHkh3D9AkmBrrnbFg",
+        "https://open.spotify.com/track/0ECGnyHCiGOzEkXY1c5yJ2",
     ]
 
     # recs.recommendations(token, 10, artists, genres, tracks)
     # print(recs.get_recommendations())
 
     recs.set_seeds(artists, genres, tracks)
+    print(recs.artists)
     print(recs.tracks)
 
 

@@ -16,7 +16,7 @@ class Playlist:
         self.redirect_uri = os.environ["REDIRECT_URI"]
 
         # Define scopes
-        self.scope = "playlist-modify-public"
+        self.scope = "playlist-modify-public user-top-read"
 
     def authorize(self):
 
@@ -68,7 +68,7 @@ class Playlist:
         # Delete created playlist in instance recommendations were failed
         sp.current_user_unfollow_playlist(id)
 
-    
+
 def main():
     playlist = Playlist()
 
