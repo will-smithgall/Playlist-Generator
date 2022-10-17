@@ -7,6 +7,7 @@ Using the Spotify API and the spotipy python library, this program will generate
 By running this program, you will be giving it the ability to read public data, as well as modify public data. The only data that will be modified is the playlist that the program creates, nothing else will be bothered.
 
 ## Getting Started
+
 1. Clone the repo
 2. Install the requirements 
 ```sh
@@ -20,3 +21,7 @@ CLIENT_SECRET="Your client secret"
 REDIRECT_URI="Your redirect URI"
 ```
 Note: The redirect URI in this file must be the same as the redirect URI that you put in the dashboard when registering the program
+
+## Usage
+
+After running the program, you will be promted to choose either Automatic or Custom. Custom will allow you to enter your own links, while automatic will generate the playlist based off of your most listened to tracks and artists. Both choices will require a genre to be entered. Respond to said prompt for Spotify's full list of valid genres.
